@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CoinGenerator : MonoBehaviour
@@ -54,13 +55,9 @@ public class CoinGenerator : MonoBehaviour
 
         yield return delay;
 
-        foreach (Coin coin in _coins) 
-        {
-            if (coin.isActiveAndEnabled == false) 
-            {
-                coin.gameObject.SetActive(true);
-                yield break;
-            }
-        }
+        var result = _coins.FirstOrDefault(p => p.gameObject.activeSelf == false);
+
+        result.gameObject.SetActive(true);
+
     }
 }
